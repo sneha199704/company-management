@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    dev:
+        container_name: company_management
+        image: company-management:0.0.1
+        build:
+            context: .
+            target: development
+            dockerfile: ./Dockerfile
+        command: npm run start:debug
+        ports:
+            - 3000:3000
+            - 9229:9229
+        networks:
+            - nesjs-network
+        volumes:
+            - .:/demo-task/company-management/src/app
+            - /demo-task/company-management/src/app/node_modules
+        restart: unless-stopped
+networks:
+    nesjs-network:
