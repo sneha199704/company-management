@@ -5,7 +5,6 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  ParseIntPipe,
   Post,
   Query,
   UseGuards,
@@ -18,7 +17,7 @@ import { CompanyService } from 'src/company/company.service';
 
 @Controller('company')
 export class CompanyController {
-  constructor(private readonly companyService: CompanyService) { }
+  constructor(private readonly companyService: CompanyService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post('create')
@@ -33,7 +32,10 @@ export class CompanyController {
     try {
       return this.companyService.findCompanyById(id);
     } catch (error: any) {
-      throw new HttpException(error?.message || "Something went wrong", error?.status || HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        error?.message || 'Something went wrong',
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -43,7 +45,10 @@ export class CompanyController {
     try {
       return this.companyService.getCompaniesByName(name);
     } catch (error: any) {
-      throw new HttpException(error?.message || "Something went wrong", error?.status || HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        error?.message || 'Something went wrong',
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -53,8 +58,11 @@ export class CompanyController {
     try {
       return this.companyService.getCompanyByTeam();
     } catch (error: any) {
-      console.log("error", error);
-      throw new HttpException(error?.message || "Something went wrong", error?.status || HttpStatus.INTERNAL_SERVER_ERROR);
+      console.log('error', error);
+      throw new HttpException(
+        error?.message || 'Something went wrong',
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

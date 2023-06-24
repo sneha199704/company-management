@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -15,7 +14,7 @@ import { TeamService } from 'src/team/team.service';
 
 @Controller('team')
 export class TeamController {
-  constructor(private readonly teamService: TeamService) { }
+  constructor(private readonly teamService: TeamService) {}
 
   @UseGuards(AuthGuard('jwt'))
   @Post('create')
@@ -24,7 +23,10 @@ export class TeamController {
     try {
       return this.teamService.createTeam(createTeamDto);
     } catch (error: any) {
-      throw new HttpException(error?.message || "Something went wrong", error?.status || HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        error?.message || 'Something went wrong',
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

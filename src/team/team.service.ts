@@ -7,7 +7,7 @@ import { CreateTeamDto } from './dto/create-team.dto';
 @Injectable()
 export class TeamService {
   constructor(
-    @InjectRepository(Team) private readonly teamRepository: Repository<Team>
+    @InjectRepository(Team) private readonly teamRepository: Repository<Team>,
   ) {}
 
   createTeam(teamParams: CreateTeamDto) {

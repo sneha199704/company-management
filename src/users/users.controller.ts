@@ -12,7 +12,7 @@ import { UsersService } from 'src/users/users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) { }
+  constructor(private readonly userService: UsersService) {}
 
   @Post('login')
   @UsePipes(ValidationPipe)
@@ -20,7 +20,10 @@ export class UsersController {
     try {
       return this.userService.login(createUserDto);
     } catch (error: any) {
-      throw new HttpException(error?.message || "Something went wrong", error?.status || HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(
+        error?.message || 'Something went wrong',
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }

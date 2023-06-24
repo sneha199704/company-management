@@ -29,15 +29,15 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       }),
       inject: [ConfigService],
     }),
-    PassportModule.register({defaultStrategy: 'jwt'}),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       global: true,
       secret: constants.secret,
-      signOptions: { expiresIn: '600s' },
+      signOptions: { expiresIn: '1d' },
     }),
     UsersModule,
     CompanyModule,
-    TeamModule
+    TeamModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

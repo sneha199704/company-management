@@ -10,22 +10,28 @@ import { messageConstants } from 'src/constants/messageConstant';
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async login(userParams: CreateUserDto) {
     const user = await this.userRepository.findOne({
       where: {
-        username: userParams?.username
-      }
+        username: userParams?.username,
+      },
     });
-    
+
     if (!user) {
-      throw new HttpException(messageConstants.USER_NOT_EXIST, HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        messageConstants.USER_NOT_EXIST,
+        HttpStatus.UNAUTHORIZED,
+      );
     }
 
     if (user?.password !== userParams?.password) {
-      throw new HttpException(messageConstants.INCORRECT_PASSWORD, HttpStatus.UNAUTHORIZED);
+      throw new HttpException(
+        messageConstants.INCORRECT_PASSWORD,
+        HttpStatus.UNAUTHORIZED,
+      );
     }
 
     // const newUser = this.userRepository.create(userParams);
@@ -34,8 +40,8 @@ export class UsersService {
     return {
       ...user,
       access_token: await this.jwtService.signAsync({
-        username: user?.username
+        username: user?.username,
       }),
     };
-  }     
+  }
 }

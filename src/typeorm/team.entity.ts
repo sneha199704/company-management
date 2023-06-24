@@ -1,10 +1,16 @@
-import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Company } from './company.entity';
 
 @Entity()
 export class Team {
   @Column()
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
@@ -18,12 +24,11 @@ export class Team {
   })
   teamLeadName: string;
 
-  // @ManyToOne(type => Company, company => company.teams) company: Company; 
+  // @ManyToOne(type => Company, company => company.teams) company: Company;
 
-  @ManyToOne((type) => Company, (company) => company.teams, {
+  @ManyToOne(() => Company, (company) => company.teams, {
     cascade: true,
   })
   @JoinTable()
-  company: Company[]
-
+  company: Company[];
 }

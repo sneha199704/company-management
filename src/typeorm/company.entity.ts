@@ -3,7 +3,7 @@ import { Team } from './team.entity';
 
 @Entity()
 export class Company {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({
@@ -29,5 +29,5 @@ export class Company {
   })
   inceptionDate: Date;
 
-  @OneToMany(type => Team, team => team.company) teams: Team[];
+  @OneToMany(() => Team, (team) => team.company) teams: Team[];
 }
